@@ -24,8 +24,8 @@ uint8_t d7=7;
 uint8_t bl=3;
 
 // LCD display size
-uint8_t rows=2;
-uint8_t cols=8;
+uint8_t rows=4;
+uint8_t cols=20;
 
 LiquidCrystal_I2C lcd(i2c, en, rw, rs, d4, d5, d6, d7, bl, POSITIVE);
 
@@ -37,6 +37,13 @@ lcd.clear();
 lcd.print("ABCDEFGH");
 lcd.setCursor(0, 1);
 lcd.print("12345678");
+
+if (rows>2) {
+	lcd.setCursor(0, 2);
+	lcd.print("ABCDEFGH");
+	lcd.setCursor(0, 3);
+	lcd.print("12345678");
+}
 
 sleep(2);
 
@@ -54,16 +61,25 @@ lcd.write('l');
 lcd.write('d');
 lcd.write('!');
 
+if (rows>2) {
+	lcd.setCursor(0,2);
+	lcd.print("We say");
+	lcd.setCursor(0,3);
+	lcd.print("H'ello back!");
+}
+
 sleep(2);
 lcd.blink();
 sleep(2);
 
-lcd.home();
+lcd.clear();
 lcd.cursor();
 lcd.autoscroll();
-// lcd.setCursor(15,1);
-for (uint8_t i=33; i<=126; i++) {
+for (uint8_t i=33; i<255; i++) {
+	usleep(35000);
 	lcd.write((char)i);
+	if (i % 8==0)
+		sleep(1);
 }
 sleep(1);
 lcd.noBlink();
