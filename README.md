@@ -8,6 +8,4 @@ Based on the "New LiquidCrystal" library from https://bitbucket.org/fmalpartida/
 Only the i2c functionality is kept from the arduino original library, there is no support for
 other methods of accessing the LCD screens.
 
-License as the original, changes and Linux i2c device adaptions are (C) Kaj-Michael Lang <milang@tal.org>
-
-The current version is tied to wiringPi but that dependency will be removed soon.
+License as the original (CC-BY-SA), changes and Linux i2c device adaptions are (C) Kaj-Michael Lang <milang@tal.org>
