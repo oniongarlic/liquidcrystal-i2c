@@ -26,7 +26,11 @@
 // ---------------------------------------------------------------------------
 
 #include <inttypes.h>
-#include <wiringPiI2C.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <linux/i2c-dev.h>
 #include "I2CIO.h"
 
 // CLASS VARIABLES
@@ -49,12 +53,21 @@ I2CIO::I2CIO ( )
 
 //
 // begin
-int I2CIO::begin (  uint8_t i2cAddr )
+int I2CIO::begin ( const char *device, uint8_t i2cAddr )
 {
+   int r;
+
    _i2cAddr = i2cAddr;
-   _fd = wiringPiI2CSetup(i2cAddr);
+
+   _fd = open (device, O_RDWR);
    if (_fd<0)
      return false;
+
+   r=ioctl (_fd, I2C_SLAVE, i2cAddr);
+   if (r<0) {
+     close(_fd);
+     return false;
+   }
 
    _initialised = true;
    return true;
@@ -113,7 +126,7 @@ int I2CIO::write ( uint8_t value )
       // Only write HIGH the values of the ports that have been initialised as
       // outputs updating the output shadow of the device
 	_shadow = ( value & ~(_dirMask) );
-	status=wiringPiI2CWrite(_fd, _shadow);
+	status=i2c_smbus_write_byte(_fd, _shadow);
    }
    return ( (status == 0) );
 }

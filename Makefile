@@ -4,7 +4,7 @@ SRC=I2CIO.cpp LCD.cpp LiquidCrystal_I2C.cpp
 
 OBJ=$(SRC:.cpp=.o)
 STATIC=lci2c.a
-LDFLAGS=-L/usr/local/lib -lwiringPi 
+LDFLAGS=
 
 CC=g++
 

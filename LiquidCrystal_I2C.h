@@ -196,7 +196,6 @@ private:
    uint8_t _Rw;               // LCD expander word for R/W pin
    uint8_t _Rs;               // LCD expander word for Register Select pin
    uint8_t _data_pins[4];     // LCD data lines
-   
 };
 
 #endif

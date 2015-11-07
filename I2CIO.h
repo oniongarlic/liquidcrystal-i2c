@@ -65,7 +65,7 @@ public:
     @param      i2cAddr: I2C Address where the device is located.
     @result     1 if the device was initialized correctly, 0 otherwise
     */
-   int begin ( uint8_t i2cAddr );
+   int begin ( const char *device, uint8_t i2cAddr );
 
    /*!
     @method

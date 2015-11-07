@@ -194,7 +194,7 @@ int LiquidCrystal_I2C::init()
    // initialize the backpack IO expander
    // and display functions.
    // ------------------------------------------------------------------------
-   if ( _i2cio.begin ( _Addr ) == 1 )
+   if ( _i2cio.begin ( "/dev/i2c-1", _Addr ) == 1 )
    {
       _i2cio.portMode ( OUTPUT );  // Set the entire IO extender to OUTPUT
       _displayfunction = LCD_4BITMODE | LCD_1LINE | LCD_5x8DOTS;
