@@ -8,11 +8,12 @@ LDFLAGS=
 
 CC=g++
 
-all: static main
+all: static test-lcd
 
 main.o: main.cpp
 
-main: main.o $(OBJ) 
+test-lcd: main.o $(OBJ) 
+	$(CC) -o test-lcd main.o $(OBJ)
 
 static:	$(STATIC)
 
