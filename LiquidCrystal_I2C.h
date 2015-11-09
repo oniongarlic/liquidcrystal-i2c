@@ -46,9 +46,9 @@ public:
     @param      lcd_Addr[in] I2C address of the IO expansion module. For I2CLCDextraIO,
     the address can be configured using the on board jumpers.
     */
-   LiquidCrystal_I2C (uint8_t lcd_Addr);
+   LiquidCrystal_I2C (const char *dev, uint8_t lcd_Addr);
    // Constructor with backlight control
-   LiquidCrystal_I2C (uint8_t lcd_Addr, uint8_t backlighPin, t_backlighPol pol);
+   LiquidCrystal_I2C (const char *dev, uint8_t lcd_Addr, uint8_t backlighPin, t_backlighPol pol);
    
    /*!
     @method     
@@ -62,9 +62,9 @@ public:
     @param      Rw[in] LCD Rw (Read/write) pin connected to the IO extender module
     @param      Rs[in] LCD Rs (Reset) pin connected to the IO extender module
     */
-   LiquidCrystal_I2C( uint8_t lcd_Addr, uint8_t En, uint8_t Rw, uint8_t Rs);
+   LiquidCrystal_I2C(const char *dev, uint8_t lcd_Addr, uint8_t En, uint8_t Rw, uint8_t Rs);
    // Constructor with backlight control
-   LiquidCrystal_I2C(uint8_t lcd_Addr, uint8_t En, uint8_t Rw, uint8_t Rs,
+   LiquidCrystal_I2C(const char *dev, uint8_t lcd_Addr, uint8_t En, uint8_t Rw, uint8_t Rs,
                      uint8_t backlighPin, t_backlighPol pol);   
    
    /*!
@@ -83,10 +83,10 @@ public:
     @param      d6[in] LCD data 2 pin map on IO extender module
     @param      d7[in] LCD data 3 pin map on IO extender module
     */
-   LiquidCrystal_I2C(uint8_t lcd_Addr, uint8_t En, uint8_t Rw, uint8_t Rs, 
+   LiquidCrystal_I2C(const char *dev, uint8_t lcd_Addr, uint8_t En, uint8_t Rw, uint8_t Rs, 
                      uint8_t d4, uint8_t d5, uint8_t d6, uint8_t d7 );
    // Constructor with backlight control
-   LiquidCrystal_I2C(uint8_t lcd_Addr, uint8_t En, uint8_t Rw, uint8_t Rs, 
+   LiquidCrystal_I2C(const char *dev, uint8_t lcd_Addr, uint8_t En, uint8_t Rw, uint8_t Rs, 
                      uint8_t d4, uint8_t d5, uint8_t d6, uint8_t d7,
                      uint8_t backlighPin, t_backlighPol pol);
    /*!
@@ -166,7 +166,7 @@ private:
     @param      d6[in] LCD data 2 pin map on IO extender module
     @param      d7[in] LCD data 3 pin map on IO extender module
     */
-   void config (uint8_t lcd_Addr, uint8_t En, uint8_t Rw, uint8_t Rs, 
+   void config (const char *dev, uint8_t lcd_Addr, uint8_t En, uint8_t Rw, uint8_t Rs, 
                 uint8_t d4, uint8_t d5, uint8_t d6, uint8_t d7 );
    
    /*!
@@ -188,6 +188,7 @@ private:
    void pulseEnable(uint8_t);
    
    
+   const char *_dev;
    uint8_t _Addr;             // I2C Address of the IO expander
    uint8_t _backlightPinMask; // Backlight IO pin mask
    uint8_t _backlightStsMask; // Backlight status mask

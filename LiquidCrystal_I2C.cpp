@@ -89,46 +89,45 @@
 
 // CONSTRUCTORS
 // ---------------------------------------------------------------------------
-LiquidCrystal_I2C::LiquidCrystal_I2C( uint8_t lcd_Addr )
+LiquidCrystal_I2C::LiquidCrystal_I2C(const char *dev, uint8_t lcd_Addr)
 {
-   config(lcd_Addr, EN, RW, RS, D4, D5, D6, D7);
+   config(dev, lcd_Addr, EN, RW, RS, D4, D5, D6, D7);
 }
 
 
-LiquidCrystal_I2C::LiquidCrystal_I2C(uint8_t lcd_Addr, uint8_t backlighPin, 
-                                     t_backlighPol pol = POSITIVE)
+LiquidCrystal_I2C::LiquidCrystal_I2C(const char *dev, uint8_t lcd_Addr, uint8_t backlighPin, t_backlighPol pol = POSITIVE)
 {
-   config(lcd_Addr, EN, RW, RS, D4, D5, D6, D7);
+   config(dev, lcd_Addr, EN, RW, RS, D4, D5, D6, D7);
    setBacklightPin(backlighPin, pol);
 }
 
-LiquidCrystal_I2C::LiquidCrystal_I2C(uint8_t lcd_Addr, uint8_t En, uint8_t Rw,
+LiquidCrystal_I2C::LiquidCrystal_I2C(const char *dev, uint8_t lcd_Addr, uint8_t En, uint8_t Rw,
                                      uint8_t Rs)
 {
-   config(lcd_Addr, En, Rw, Rs, D4, D5, D6, D7);
+   config(dev, lcd_Addr, En, Rw, Rs, D4, D5, D6, D7);
 }
 
-LiquidCrystal_I2C::LiquidCrystal_I2C(uint8_t lcd_Addr, uint8_t En, uint8_t Rw,
+LiquidCrystal_I2C::LiquidCrystal_I2C(const char *dev, uint8_t lcd_Addr, uint8_t En, uint8_t Rw,
                                      uint8_t Rs, uint8_t backlighPin, 
                                      t_backlighPol pol = POSITIVE)
 {
-   config(lcd_Addr, En, Rw, Rs, D4, D5, D6, D7);
+   config(dev, lcd_Addr, En, Rw, Rs, D4, D5, D6, D7);
    setBacklightPin(backlighPin, pol);
 }
 
-LiquidCrystal_I2C::LiquidCrystal_I2C(uint8_t lcd_Addr, uint8_t En, uint8_t Rw,
+LiquidCrystal_I2C::LiquidCrystal_I2C(const char *dev, uint8_t lcd_Addr, uint8_t En, uint8_t Rw,
                                      uint8_t Rs, uint8_t d4, uint8_t d5,
                                      uint8_t d6, uint8_t d7 )
 {
-   config(lcd_Addr, En, Rw, Rs, d4, d5, d6, d7);
+   config(dev, lcd_Addr, En, Rw, Rs, d4, d5, d6, d7);
 }
 
-LiquidCrystal_I2C::LiquidCrystal_I2C(uint8_t lcd_Addr, uint8_t En, uint8_t Rw,
+LiquidCrystal_I2C::LiquidCrystal_I2C(const char *dev, uint8_t lcd_Addr, uint8_t En, uint8_t Rw,
                                      uint8_t Rs, uint8_t d4, uint8_t d5,
                                      uint8_t d6, uint8_t d7, uint8_t backlighPin, 
                                      t_backlighPol pol = POSITIVE )
 {
-   config(lcd_Addr, En, Rw, Rs, d4, d5, d6, d7);
+   config(dev, lcd_Addr, En, Rw, Rs, d4, d5, d6, d7);
    setBacklightPin(backlighPin, pol);
 }
 
@@ -194,7 +193,7 @@ int LiquidCrystal_I2C::init()
    // initialize the backpack IO expander
    // and display functions.
    // ------------------------------------------------------------------------
-   if ( _i2cio.begin ( "/dev/i2c-1", _Addr ) == 1 )
+   if ( _i2cio.begin ( _dev, _Addr ) == 1 )
    {
       _i2cio.portMode ( OUTPUT );  // Set the entire IO extender to OUTPUT
       _displayfunction = LCD_4BITMODE | LCD_1LINE | LCD_5x8DOTS;
@@ -206,10 +205,11 @@ int LiquidCrystal_I2C::init()
 
 //
 // config
-void LiquidCrystal_I2C::config (uint8_t lcd_Addr, uint8_t En, uint8_t Rw, uint8_t Rs, 
+void LiquidCrystal_I2C::config (const char *dev, uint8_t lcd_Addr, uint8_t En, uint8_t Rw, uint8_t Rs, 
                                 uint8_t d4, uint8_t d5, uint8_t d6, uint8_t d7 )
 {
    _Addr = lcd_Addr;
+   _dev = dev;
    
    _backlightPinMask = 0;
    _backlightStsMask = LCD_NOBACKLIGHT;
@@ -223,7 +223,7 @@ void LiquidCrystal_I2C::config (uint8_t lcd_Addr, uint8_t En, uint8_t Rw, uint8_
    _data_pins[0] = ( 1 << d4 );
    _data_pins[1] = ( 1 << d5 );
    _data_pins[2] = ( 1 << d6 );
-   _data_pins[3] = ( 1 << d7 );   
+   _data_pins[3] = ( 1 << d7 );
 }
 
 

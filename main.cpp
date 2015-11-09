@@ -27,7 +27,7 @@ uint8_t bl=3;
 uint8_t rows=4;
 uint8_t cols=20;
 
-LiquidCrystal_I2C lcd(i2c, en, rw, rs, d4, d5, d6, d7, bl, POSITIVE);
+LiquidCrystal_I2C lcd("/dev/i2c-1", i2c, en, rw, rs, d4, d5, d6, d7, bl, POSITIVE);
 
 lcd.begin(cols, rows);
 
