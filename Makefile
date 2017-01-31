@@ -1,7 +1,7 @@
 HEADERS=I2CIO.h LCD.h LiquidCrystal_I2C.h smbus.h
 SRC=I2CIO.cpp LCD.cpp LiquidCrystal_I2C.cpp smbus.c
 
-OBJ=$(SRC:.cpp=.o)
+OBJ=$(patsubst %.cpp,%.o,$(filter %.cpp,$(SRC))) $(patsubst %.c,%.o,$(filter %.c,$(SRC)))
 STATIC=libliquidcrystali2c.a
 LDFLAGS=
 
