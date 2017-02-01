@@ -28,10 +28,12 @@
 #include <inttypes.h>
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <sys/ioctl.h>
 #include <fcntl.h>
 #include <unistd.h>
 #include <linux/i2c-dev.h>
 #include "I2CIO.h"
+#include "smbus.h"
 
 // CLASS VARIABLES
 // ---------------------------------------------------------------------------
