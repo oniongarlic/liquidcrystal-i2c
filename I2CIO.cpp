@@ -30,7 +30,14 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <unistd.h>
-#include <linux/i2c-dev.h>
+#include <sys/ioctl.h>
+
+extern "C"
+{
+    #include<linux/i2c-dev.h>
+    #include <i2c/smbus.h>
+}
+
 #include "I2CIO.h"
 
 // CLASS VARIABLES

@@ -3,7 +3,9 @@ SRC=I2CIO.cpp LCD.cpp LiquidCrystal_I2C.cpp
 
 OBJ=$(SRC:.cpp=.o)
 STATIC=libliquidcrystali2c.a
-LDFLAGS=
+LDFLAGS=-L /usr/lib/x86_64-linux-gnu/ -li2c
+
+CFLAGS=-ggdb -O2
 
 CC=g++
 
@@ -13,8 +15,8 @@ all: static test-lcd
 
 main.o: main.cpp
 
-test-lcd: main.o $(OBJ) 
-	$(CC) -o test-lcd main.o $(OBJ)
+test-lcd: main.o $(OBJ)
+	$(CC) -o test-lcd main.o libliquidcrystali2c.a $(LDFLAGS)
 
 static:	$(STATIC)
 
