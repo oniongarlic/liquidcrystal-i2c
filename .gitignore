@@ -1,0 +1,7 @@
+.*
+*.o
+
+!.gitignore
+
+libliquidcrystali2c.a
+test-lcd
